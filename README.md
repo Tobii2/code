@@ -579,7 +579,17 @@ Back
 Giỏ Hàng
 
 </h3>
+<div class="flex gap-4 mb-8 mt-5">
+    <input type="text"
+           id="searchCart"
+           placeholder="Tìm kiếm sản phẩm..."
+           onkeyup="searchCart()"
+           class="flex-1 border border-green-300 px-5 py-4 rounded-xl outline-none">
+    <button class="bg-green-600 text-white px-6 py-4 rounded-xl">
+        Tìm Kiếm
 
+    </button>
+</div>
 <button
     onclick="checkout()"
     class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg"
@@ -1708,7 +1718,59 @@ updateCart();
 closeBuyModal();
 
 }
+    function searchCart() {
 
+        const keyword =
+            document
+                .getElementById("searchCart")
+                .value
+                .toLowerCase();
+
+        let html = "";
+
+        cart.forEach(item => {
+
+            if (
+                item.name.toLowerCase().includes(keyword)
+            ) {
+
+                html += `
+
+<div class="cart-item bg-white p-6 rounded-2xl shadow-lg mb-6">
+
+<div class="flex justify-between items-center">
+
+<div>
+
+<h3 class="text-2xl font-bold text-green-700">
+
+${item.name}
+
+</h3>
+
+<p class="text-xl mt-2">
+
+${item.price}
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+            }
+
+        });
+
+        document
+            .getElementById("cartList")
+            .innerHTML = html;
+
+    }
 function updateCart(){
 
 let html = "";
@@ -1955,7 +2017,7 @@ document
 .getElementById("billContent")
 .innerHTML += `
 
-<div class="bg-white p-8 rounded-2xl shadow-lg mb-8">
+<div class="cart-item bg-white p-8 rounded-2xl shadow-lg mb-8">
 
 <h3 class="text-3xl font-bold text-green-700 mb-6">
 
